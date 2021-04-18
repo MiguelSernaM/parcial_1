@@ -38,7 +38,11 @@
 \tableofcontents
 
 \section{Análisis del problema}
-analisis aca
+El primer reto era evidente, debíamos conectar 64 luces LED a la mínima cantidad de pines posibles, claro esta, haciendo uso del dispositvo 74CH595 presentado en la clase, para si poder ampliar la cantidad de salidas digitales.\\
+
+Terminado con eso, podríamos empezar a buscar metodos para encerder ciertos LED y dejar los otros apagados y asi poder formar figuras con la matriz 8x8, la opción mas lógica sería primero encender todos los LED y poner dicha solución en la función 'Verificación'. Apartir de la solución usada en la función 'Imagen', la usaríamos en 'Publik' para que almacene los 3 caracteres deseados e imprima uno por uno.\\
+
+Además de eso, debíamos hacer uso del serial para darle indicaciones al usuario y para que pudiese ingresar el numero, letra o caracter deseado y  aclarar las restricciones en el manual de usuario para así no generar errores.
 
 \section{Esquema} \label{contenido}
 texto aqui
@@ -48,7 +52,9 @@ char texto = "aqui"
 \end{lstlisting}
 
 \section{Problemas de desarrollo} \label{conclulsion}
-problemas aqui
+El principal de los problemas que se nos presento fue sobre como ibamos a indicar los valores que los LED debian tener para formar cada letra, al final decidimos realizarlo de la forma mas obvia y lógica, simplemete dando los valores en binario a cada fila para formar dicho caracter, por ejemplo, una fila completamente encendida seria [1,1,1,1,1,1,1,1] y con esa misma logica podriamos  'dibujar' las matrices fila por fia de cada letra. \\
+se nos genero un error de conexion de los LEDs porque se formaban las figuras, pero al reves
+
 \section{Evolución del algoritmo} \label{conclulsion}
 evolucion here
 \bibliographystyle{IEEEtran}
