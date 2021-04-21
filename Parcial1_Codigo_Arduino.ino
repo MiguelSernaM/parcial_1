@@ -10,56 +10,15 @@ void publik(char);
 //Funcion para leer 8 bites de cada fila y mirar si estan disponibles
 void desplazarbyte(uint8_t Pindato, uint8_t Pinreloj, uint8_t val);
 short int opcion;
-char  letra;
-void mostrarleds(int L[],int);
-int A[]  = {0,60,102,102,126,102,102,102};
-int B[]  = {120,72,72,112,72,68,68,124};
-int C[]  = {0,30,32,64,64,64,32,30};
-int D[]  = {0,56,36,34,34,36,56,0};
-int E[]  = {0,60,32,56,32,32,60,0};
-int F[]  = {0,60,32,56,32,32,32,0};
-int G[]  = {0,62,32,32,46,34,62,0};
-int H[]  = {0,36,36,60,36,36,36,0};
-int I[]  = {0,56,16,16,16,16,56,0};
-int J[]  = {0,28,8,8,8,40,56,0};
-int K[]  = {0,36,40,48,40,36,36,0};
-int L[]  = {0,32,32,32,32,32,60,0};
-int M[]  = {0,0,68,170,146,130,130,0};
-int N[]  = {0,34,50,42,38,34,0,0};
-int O[]  = {0,60,66,66,66,66,60,0};
-int P[]  = {0,56,36,36,56,32,3,0};
-int Q[]  = {0,60,66,66,66,70,62,1};
-int R[]  = {0,56,36,36,56,36,36,0};
-int S[]  = {0,60,32,60,4,4,60,0};
-int T[]  = {0,124,16,16,16,16,16,0};
-int U[]  = {0,66,66,66,66,36,24,0};
-int V[]  = {0,34,34,34,20,20,8,0};
-int W[]  = {0,130,146,84,84,40,0,0};
-int X[]  = {0,66,36,24,24,36,66,0};
-int Y[]  = {0,68,40,16,16,16,16,0};
-int Z[]  = {0,60,4,8,16,32,60,0};
-int uno[]   = {3,7,11,3,3,3,3,3};
-int dos[]   = {62,66,68,8,16,32,64,255};
-int tres[]  = {60,66,2,30,2,66,60,0};
-int cuatro[]= {6,18,34,66,255,66,66,2};
-int cinco[] = {255,164,164,255,3,3,255,0};
-int seis[]  = {8,18,34,124,66,66,60,0};
-int siete[] = {255,3,6,12,24,48,96,192};
-int ocho[]  = {60,66,66,60,66,66,60,0};
-int nueve[] = {255,195,195,255,3,3,3,3};
-int cero[]  = {255,129,129,129,129,129,129,255};
-int ALL[] = {255,255,255,255,255,255,255,255};
-int cara1[] = {0,36,36,0,66,66,60,0};
-int cara2[] = {165,165,165,231,0,129,90,36};
-int cara3[] = {102,102,0,126,66,66,126,0};
+char letra;
+void mostrarleds(int *Lista,int);
+int ALL[]   = {255,255,255,255,255,255,255,255};
 
 
 void setup(){
 //inicializamos el puerto serial
   Serial.begin(9600);
-
   //------------------------------
-
   //pin de salida
   pinMode(SER, OUTPUT);
   //pin de salida
@@ -93,21 +52,34 @@ void loop(){
         Serial.println("Por favor, ingrese la letra que sea ver en pantalla: ");
         while(true){
       if(Serial.available()){
-  	  	letra=Serial.read();   
+  	  	letra = Serial.read();   
         delay(1000);
-		imagen(letra,5000);
+        imagen(letra,4000);
+		Serial.println("\n\n\n\n\n\n\n\n");
         break;
       }
         }
-        opcion = 0;
+      Serial.println("(1) Verificar que los leds funcionen");
+  	  Serial.println("(2) Mostrar un patron ingresado en los leds");
+  	  Serial.println("(3) Mostrar una secuencia de patrones en los leds");
+ 	  Serial.println("(4) Salir ");
+      opcion = 0;
       }
       //Mostrar secuencia de patrones
       else if(opcion == 3){ 
         publik();
+        Serial.println("\n\n\n\n\n\n\n\n");
+        opcion = 0;
       }
+   	  else if(opcion == 4){
+        Serial.print("Adios bebe <3");
+        delay(400);
+    	exit(0);
+    }	
     }while(opcion <1 && opcion >3);
   
 }  
+//Definicion de funciones--------------------------------
 void verificacion(){
   for (int i=0; i<=8; i++) {
 
@@ -118,170 +90,263 @@ void verificacion(){
   }
 }
 void imagen(char letra,int tiempo){
-  
-  delay(500);
+    int *valores = new int[8];
     if(letra >= 97 && letra <= 122){
     	letra -= 32; 
     }
       //para la letra A
       if(letra == 'A'){
-	  mostrarleds(A,tiempo);
+      	int A[]  = {0,60,102,102,126,102,102,102};
+		valores = A;
+	  	mostrarleds(valores,tiempo);
       }
       //para letra B
       else if(letra == 'B'){
-      mostrarleds(B,tiempo);
+        int B[]  = {120,72,72,112,72,68,68,124};
+		valores = B;
+	  	mostrarleds(valores,tiempo);
       }
       //para letra C
       else if(letra == 'C'){
-      	mostrarleds(C,tiempo);
+        int C[]  = {0,30,32,64,64,64,32,30};
+      	valores = C;
+	  	mostrarleds(valores,tiempo);
       }
       //para letra D
       else if(letra == 'D'){
-     	mostrarleds(D,tiempo);
+        int D[]  = {0,56,36,34,34,36,56,0};
+        valores = D;
+	  	mostrarleds(valores,tiempo);
       }
       //para letra E
       else if(letra == 'E'){
-     mostrarleds(E,tiempo);
+        int E[]  = {0,60,32,56,32,32,60,0};
+        valores = E;
+	  	mostrarleds(valores,tiempo);
       }
       //para letra F
       else if(letra == 'F'){
-     	mostrarleds(F,tiempo);
+        int F[]  = {0,60,32,56,32,32,32,0};
+     	valores = F;
+	  	mostrarleds(valores,tiempo);
       }
       //para letra G
       else if(letra == 'G'){
-     	mostrarleds(G,tiempo);
+        int G[]  = {0,62,32,32,46,34,62,0};
+     	valores = G;
+	  	mostrarleds(valores,tiempo);
       }
       //para letra H
       else if(letra == 'H'){
-     	mostrarleds(H,tiempo);
+        int H[]  = {0,36,36,60,36,36,36,0};
+        valores = H;
+	  	mostrarleds(valores,tiempo);
       }
       //para letra I
       else if(letra == 'I'){
-      	mostrarleds(I,tiempo) ;
+        int I[] = {0,56,16,16,16,16,56,0};
+      	valores = I;
+	  	mostrarleds(valores,tiempo);
       }
       //para letra J
       else if(letra == 'J'){
-      	mostrarleds(J,tiempo);
+        int J[]  = {0,28,8,8,8,40,56,0};
+        valores = J;
+	  	mostrarleds(valores,tiempo);
       }
       //para letra K
       else if(letra == 'K'){
-     	mostrarleds(K,tiempo);
+        int K[]  = {0,36,40,48,40,36,36,0};
+        valores = K;
+	  	mostrarleds(valores,tiempo);
       }
       //para letra L
       else if(letra == 'L'){
-     	mostrarleds(L,tiempo);
+        int L[]  = {48,48,48,48,48,48,62,62};
+        valores = L;
+	  	mostrarleds(valores,tiempo);
       }
       //para letra M
       else if(letra == 'M'){
-          mostrarleds(M,tiempo);
+        int M[]  = {0,0,68,170,146,130,130,0};
+      	valores = M;
+        mostrarleds(valores,tiempo);
       }
       //para letra N
       else if(letra == 'N'){
-      	mostrarleds(N,tiempo);
+        int N[]  = {0,34,50,42,38,34,0,0};
+        valores = N;
+      	mostrarleds(valores,tiempo);
       }
       //para letra O
       else if(letra == 'O'){
-      	mostrarleds(O,tiempo);
+        int O[]  = {0,60,66,66,66,66,60,0};
+     	valores = O;
+      	mostrarleds(valores,tiempo);
       }
       //para letra P
       else if(letra == 'P'){
-      	mostrarleds(P,tiempo);
+        int P[]  = {120,108,108,120,96,96,96,96};
+		valores = P;
+      	mostrarleds(valores,tiempo);
       }
       //para letra Q
       else if(letra == 'Q'){
-      	mostrarleds(Q,tiempo);
+        int Q[]  = {0,60,66,66,66,70,62,1};     
+      	valores = Q;
+      	mostrarleds(valores,tiempo);
       }
       //para letra R
       else if(letra == 'R'){
-      	mostrarleds(R,tiempo);
+        int R[]  = {0,56,36,36,56,36,36,0};
+     	valores = R;     
+      	mostrarleds(valores,tiempo);
       }
       //para letra S
       else if(letra == 'S'){
-      	mostrarleds(S,tiempo);
+        int S[]  = {0,60,32,60,4,4,60,0};
+        valores = S;
+      	mostrarleds(valores,tiempo);
       }
       //para letra T
       else if(letra == 'T'){
-      	mostrarleds(T,tiempo);
+        int T[]  = {255,255,24,24,24,24,24,24};
+        valores = T;
+      	mostrarleds(valores,tiempo);
       }
       //para letra U
       else if(letra == 'U'){
-      	mostrarleds(U,tiempo);
+        int U[]  = {0,66,66,66,66,36,24,0};
+        valores = U;
+      	mostrarleds(valores,tiempo);
       }
       //para letra V
       else if(letra == 'V'){
-      	mostrarleds(V,tiempo);
+        int V[]  = {0,34,34,34,20,20,8,0};
+        valores = V;
+      	mostrarleds(valores,tiempo);
       }
       //para letra W
       else if(letra == 'W'){
-      	mostrarleds(W,tiempo);
+        int W[]  = {0,130,146,84,84,40,0,0};
+        valores = W;
+      	mostrarleds(valores,tiempo);
       }
       //para letra X
       else if(letra == 'X'){
-        mostrarleds(X,tiempo);
+        int X[]  = {0,66,36,24,24,36,66,0};
+        valores = X;
+        mostrarleds(valores,tiempo);
       }
       //para letra Y
       else if(letra == 'Y'){
-      mostrarleds(Y,tiempo);
+      int Y[]  = {195,102,60,24,24,24,24,24};
+      valores = Y;
+      mostrarleds(valores,tiempo);
       }
       //para letra Z
       else if(letra == 'Z'){
-      	mostrarleds(Z,tiempo);
+       int Z[]  = {0,60,4,8,16,32,60,0};
+        valores = Z;
+      	mostrarleds(valores,tiempo);
       }
       //para numero 0
       else if(letra == '0'){
-      	mostrarleds(cero,tiempo);
+        int cero[]  = {60,126,102,102,102,102,126,60};
+        valores = cero;
+         mostrarleds(valores,tiempo);
       }
+      
       //para numero 1
       else if(letra == '1'){
-      	mostrarleds(uno,tiempo);
+        int uno[]   = {24,56,88,24,24,24,24,24};
+        valores = uno;
+        mostrarleds(valores,tiempo);
       }
+        
+      
       //para numero 2
       else if(letra == '2'){
-      	mostrarleds(dos,tiempo);
+        int dos[]   = {60,126,102,12,24,48,126,126};
+        valores = dos;
+        mostrarleds(valores,tiempo);
       }
+      
       //para numero 3
       else if(letra == '3'){
-      	mostrarleds(tres,tiempo);
+        int tres[]  = {60,126,102,14,14,102,126,60};
+        valores = tres;
+        mostrarleds(valores,tiempo);
       }
+      
       //para numero 4
       else if(letra == '4'){
-      	mostrarleds(cuatro,tiempo);
+        int cuatro[]  = {14,30,54,102,255,255,6,6};
+ 		valores = cuatro;
+        mostrarleds(valores,tiempo);
       }
+      
       //para numero 5
       else if(letra == '5'){
-      	mostrarleds(cinco,tiempo);
+        int cinco[] = {254,254,192,252,254,14,254,252};
+        valores = cinco;
+        mostrarleds(valores,tiempo);
       }
+      
       //para numero 6
       else if(letra == '6'){
-      	mostrarleds(seis,tiempo);
+        int seis[]  = {30,62,112,252,254,198,254,124};
+        valores = seis;
+        mostrarleds(valores,tiempo);
       }
+          
+      
       //para numero 7
       else if(letra == '7'){
-      	mostrarleds(siete,tiempo);
+        int siete[] = {255,255,6,12,24,48,96,192};
+        valores = siete;
+        mostrarleds(valores,tiempo);
+      
       }
       //para numero 8
       else if(letra == '8'){
-      	mostrarleds(ocho,tiempo);
+        int ocho[]  = {60,66,66,60,66,66,60,0};
+        valores = ocho;
+        mostrarleds(valores,tiempo);
+      
       }
       //para numero 9
       else if(letra == '9'){
-      	mostrarleds(nueve,tiempo);
+        int nueve[] = {60,126,102,126,58,6,6,6};
+        valores = nueve;
+        mostrarleds(valores,tiempo);
       }
+      
       //para emoji1
         else if(letra == '!'){
-          mostrarleds(cara1,tiempo);
+          int cara1[] = {0,36,36,0,66,66,60,0};
+          valores = cara1;
+          mostrarleds(valores,tiempo);
+      
         }
         //para emoji2
       else if(letra == '"'){
-      	mostrarleds(cara2,tiempo);
+        int cara2[] = {165,165,165,231,0,129,90,36};
+        valores = cara2;
+        mostrarleds(valores,tiempo);
       }
+      
     //para emoji3
         else if(letra == '#'){
-          mostrarleds(cara3,tiempo);
+          int cara3[] = {102,102,0,126,66,66,126,0};
+          valores = cara3;
+          mostrarleds(valores,tiempo);
+      
         }
+  delete[] valores;
 }
 void desplazarbyte(uint8_t Pindato, uint8_t Pinreloj, uint8_t val){
-  	uint8_t i; 
+  	uint8_t i = 0; 
     for (i = 0; i < 8; i++)  {
         digitalWrite(Pindato, !!(val & (1 << i)));   
             digitalWrite(Pinreloj, HIGH);
@@ -289,24 +354,30 @@ void desplazarbyte(uint8_t Pindato, uint8_t Pinreloj, uint8_t val){
       }
   }    
 
-void mostrarleds(int L[],int tiempo){
+void mostrarleds(int *Lista,int tiempo){
   int contador = 0;
+  contador = 0;
+  int aux[1];
   while(true){
-    contador = millis();
-  	for (int i=0; i<=8; i++) {
-    	desplazarbyte(SER,SRCLK,~L[i]);
+  	for (int i=0; i <= 8; i++) 
+    {	aux[0] = Lista[i];
+     	//Serial.println(*Lista+i);
+    	desplazarbyte(SER,SRCLK,~Lista[i]);
     	desplazarbyte(SER,SRCLK,128 >> i); 
-    	digitalWrite(RCLK, 1);
-    	digitalWrite(RCLK, 0);
-  }
-    if(contador > tiempo)
-      break;
+        digitalWrite(RCLK, 1);
+    	digitalWrite(RCLK, 0);    	
+	}
+	delay(15);
+    contador = contador + 2;
+    if(contador > tiempo/100){
+    	break;
+    }
+      
   }
 }
 void publik(){
-String Lpatron;
  char charpatron[]="";
-int Npatron, Dpatron;
+ int Npatron, Dpatron;
   Serial.println("Ingrese la cantidad de patrones que desea visualizar");
   while(true){
     if(Serial.available()){
@@ -320,7 +391,7 @@ int Npatron, Dpatron;
     if(Serial.available()){
   	  Dpatron = Serial.parseInt();
       delay(200);
-      break;     
+      break;
     }
   }
   Dpatron = Dpatron*1000;
@@ -331,7 +402,9 @@ int Npatron, Dpatron;
       for(int i=0;i<=Npatron;i++){
         charpatron[i]=Serial.read();
         imagen(charpatron[i],Dpatron);
+        delay(400);
       }
+      break;
     }
   delay(200);
   }
