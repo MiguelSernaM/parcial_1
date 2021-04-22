@@ -103,25 +103,25 @@ void imagen(char letra,float tiempo){
       }
       //para letra B
       else if(letra == 'B'){
-        int B[]  = {120,72,72,112,72,68,68,124};
+        int B[]  = {248,198,198,216,216,206,198,248};
 		valores = B;
 	  	mostrarleds(valores,tiempo);
       }
       //para letra C
       else if(letra == 'C'){
-        int C[]  = {0,30,32,64,64,64,32,30};
+        int C[]  = {0,31,127,192,192,127,31,0};
       	valores = C;
 	  	mostrarleds(valores,tiempo);
       }
       //para letra D
       else if(letra == 'D'){
-        int D[]  = {0,56,36,34,34,36,56,0};
+        int D[]  = {248,252,198,195,195,198,252,248};
         valores = D;
 	  	mostrarleds(valores,tiempo);
       }
       //para letra E
       else if(letra == 'E'){
-        int E[]  = {0,60,32,56,32,32,60,0};
+        int E[]  = {255,255,224,255,255,224,255,255};
         valores = E;
 	  	mostrarleds(valores,tiempo);
       }
@@ -217,25 +217,25 @@ void imagen(char letra,float tiempo){
       }
       //para letra U
       else if(letra == 'U'){
-        int U[]  = {0,66,66,66,66,36,24,0};
+        int U[]  = {195,195,195,195,195,195,255,255};
         valores = U;
       	mostrarleds(valores,tiempo);
       }
       //para letra V
       else if(letra == 'V'){
-        int V[]  = {0,34,34,34,20,20,8,0};
+        int V[]  = {129,195,195,102,102,60,60,24};
         valores = V;
       	mostrarleds(valores,tiempo);
       }
       //para letra W
       else if(letra == 'W'){
-        int W[]  = {0,130,146,84,84,40,0,0};
+        int W[]  = {129,153,153,153,153,153,153,126};
         valores = W;
       	mostrarleds(valores,tiempo);
       }
       //para letra X
       else if(letra == 'X'){
-        int X[]  = {0,66,36,24,24,36,66,0};
+        int X[]  = {129,195,102,60,60,102,195,129};
         valores = X;
         mostrarleds(valores,tiempo);
       }
@@ -247,7 +247,7 @@ void imagen(char letra,float tiempo){
       }
       //para letra Z
       else if(letra == 'Z'){
-       int Z[]  = {0,60,4,8,16,32,60,0};
+       int Z[]  = {255,255,6,12,24,48,255,255};
         valores = Z;
       	mostrarleds(valores,tiempo);
       }
@@ -350,19 +350,17 @@ void desplazarbyte(uint8_t Pindato, uint8_t Pinreloj, uint8_t val){
   	uint8_t i = 0; 
     for (i = 0; i < 8; i++)  {
         digitalWrite(Pindato, !!(val & (1 << i)));   
-            digitalWrite(Pinreloj, HIGH);
-            digitalWrite(Pinreloj, LOW);            
+        digitalWrite(Pinreloj, HIGH);
+        digitalWrite(Pinreloj, LOW);            
       }
   }    
 
 void mostrarleds(int *Lista,float tiempo){
   int contador = 0;
-  contador = 0;
-  int aux[1];
   while(true){
   	for (int i=0; i <= 8; i++) 
-    {	desplazarbyte(SER,SRCLK,~(*(Lista+i)));
-    	desplazarbyte(SER,SRCLK,128 >> i); 
+    {	desplazarbyte(SER,SRCLK,~(*(Lista+i)));//columnas
+    	desplazarbyte(SER,SRCLK,128 >> i); //filas
         digitalWrite(RCLK, 1);
     	digitalWrite(RCLK, 0);    	
 	}
@@ -397,12 +395,16 @@ void publik(){
   Dpatron = Dpatron*1000;
   Serial.println("Ingrese La secuencia de patrones: ");
   int largo = 0;
-  while(largo < Npatron){
+  while(true){
     if(Serial.available()){
       for(int i=0;i<=Npatron;i++){
         charpatron[i]=Serial.read();
         imagen(charpatron[i],Dpatron);
-        delay(400);
+        delay(100);
+        largo++;
+        if(largo == Npatron){
+        	break;
+        }
       }
       break;
     }
