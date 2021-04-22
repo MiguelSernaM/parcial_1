@@ -1,0 +1,43 @@
+-------- Manual de uso por consola tinkercad -------------------
+
+1--->Para empezar la simulación del circuito en tinkercad presione el
+botón llamado iniciar simulación que se encuentra en la cerca de la
+esquina superior de la pantalla.
+//---------//----------//----------//----------//----------//----------//
+2--->Una vez iniciada la simulacion en la parte inferior derecha debera abrir 
+la ventana del monitor serial para esto unda click en el icono y se desplegara 
+una ventana pequeña en esta es en la que usted debera ingresar los caracteres
+para trabajar con el programa.
+//---------//----------//----------//----------//----------//----------//
+3---> El programa tiene 4 opciones de ingreso
+1) Verificar que los leds funcionen:
+	Este enciende todos los leds por un instante para comprobar
+	su funcionamiento.
+2) Mostrar una secuencia de patrones en los leds:
+	Con esta opción el usuario ingresa un dato individual y este
+	se mostrara en los leds.
+3) Mostrar una secuencia de patrones en los leds:
+	En esta opcion se mostraran una secuencia de patrones ingresada por el usuario
+	en los leds, el usuario debe especificar la cantidad de caracteres que
+	va a ingresar, el tiempo de duración en los leds de cada uno y ingresar la cadena
+	de caracteres que desea ver en los leds.
+//---------//----------//----------//----------//----------//----------//
+4---> Usted debera elegir cual desea, el programa le indicara que tipo 
+de dato debe ingresar mediante el monitor serialy usted va a escribir
+sus caracteres en el pequeño cuadro de codigode abajo y va a enviarlos
+mediante la tecla enter.
+Usted debe ser cuidadoso a la hora de ingresar datos, después de ingresar 
+un valor debe esperar a que el programa le indique que acabo la tarea
+(Cuando vea que se imprima algun mensaje despues de que usted ingreso)
+ese es el momento en el que el programa estara disponible para recibir nuevos datos.
+Para los ver emojis lea la tabla de entradas de abajo...
+
+///////////////////// TABLA DE ENTRADAS ESPECIALES //////////////////////////////////////
+En esta sección están los caracteres especiales que se salen de lo comun para mostrar
+determinados emojis en el panel de leds...
+-----------------------------------------
+|Ingreso de usuario| Mostrado en pantalla|
+|	!	   |           =)        |
+|	"          |           UnU       |
+| 	#	   |           :O        |
+-----------------------------------------
